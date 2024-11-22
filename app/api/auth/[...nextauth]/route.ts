@@ -86,10 +86,10 @@ const handler = NextAuth({
   //   return session;
   // },
 
-    async redirect() {
-    // Ensure users are redirected to your base URL after login
-    return "https://authentication-roan-eight.vercel.app/";
-  },
+  //   async redirect() {
+  //   // Ensure users are redirected to your base URL after login
+  //   return "https://authentication-roan-eight.vercel.app/";
+  // },
   },
 
 })
