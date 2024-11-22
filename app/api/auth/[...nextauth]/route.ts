@@ -8,10 +8,13 @@ const handler = NextAuth({
   id: "orcid",
   name: "ORCID",
   type: "oauth",
-  wellKnown: "https://accounts.google.com/.well-known/openid-configuration",
         clientId: process.env.ORCID_CLIENT_ID,
       clientSecret: process.env.ORCID_CLIENT_SECRET,
-  authorization: { params: { scope: "/authenticate" } },
+         authorization:
+        "https://orcid.org/oauth/authorize?response_type=code&scope=/authenticate",
+      token: "https://orcid.org/oauth/token",
+      userinfo: "https://orcid.org/v3.0/~/orcid-profile",
+
   idToken: true,
   checks: ["pkce", "state"],
   profile(profile) {
