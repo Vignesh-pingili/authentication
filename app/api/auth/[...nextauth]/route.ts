@@ -85,32 +85,13 @@ const handler = NextAuth({
     session.user.email = token.email;
     return session;
   },
-  },
-  //     callbacks: {
-  //   async jwt({ token, account }) {
-  //     if (account) {
-  //       token.accessToken = account.access_token;
-  //     }
-  //     return token;
-  //   },
-  //   async session({ session, token }) {
-  //     // session.accessToken = token.accessToken;
-  //     return session;
-  //   },
-  // },
 
-      //   authorizationUrl:
-      //   "https://orcid.org/oauth/authorize?response_type=code&scope=/authenticate",
-      // tokenUrl: "https://orcid.org/oauth/token",
-      // userinfoUrl: "https://orcid.org/v3.0/~/orcid-profile",
-      // profileUrl: "https://pub.orcid.org/v3.0/~/orcid",
-      // async profile(profile) {
-      //   return {
-      //     id: profile.orcid,
-      //     name: profile.name || null,
-      //     email: profile.email || null,
-      //   };
-      // },
+    async redirect() {
+    // Ensure users are redirected to your base URL after login
+    return "https://authentication-roan-eight.vercel.app/";
+  },
+  },
+
 })
 
 export {handler as GET, handler as POST};
