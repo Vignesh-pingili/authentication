@@ -13,8 +13,9 @@ const handler = NextAuth({
           authorization: {
       url: "https://orcid.org/oauth/authorize",
       params: {
-        response_type: "code id_token", // Ensure `id_token` is requested
-        scope: "openid email profile", // Adjust scope as per your requirements
+        response_type: "code", // Ensure `id_token` is requested
+        scope: "openid email profile",
+        nonce: "random_nonce_value", // Adjust scope as per your requirements
       },
     },
       token: "https://orcid.org/oauth/token",
