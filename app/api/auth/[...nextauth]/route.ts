@@ -64,27 +64,27 @@ const handler = NextAuth({
     secret: process.env.AUTH_SECRET,
 
       callbacks: {
-    async jwt({ token, user, account, profile, isNewUser }) {
-    // When a user signs in, the `user` and `account` objects will be available
-    if (user) {
-      token.id = user.id;
-      token.name = user.name;
-      token.email = user.email;
-    }
+  //   async jwt({ token, user, account, profile, isNewUser }) {
+  //   // When a user signs in, the `user` and `account` objects will be available
+  //   if (user) {
+  //     token.id = user.id;
+  //     token.name = user.name;
+  //     token.email = user.email;
+  //   }
 
-    // Optionally, you can use the account or profile data for further customization
-    if (account) {
-      token.accessToken = account.access_token;
-    }
+  //   // Optionally, you can use the account or profile data for further customization
+  //   if (account) {
+  //     token.accessToken = account.access_token;
+  //   }
 
-    return token;
-  },
-    async session({ session, token, user }) {
-    // Add properties from token to session object
-    session.user.name = token.name;
-    session.user.email = token.email;
-    return session;
-  },
+  //   return token;
+  // },
+  //   async session({ session, token, user }) {
+  //   // Add properties from token to session object
+  //   session.user.name = token.name;
+  //   session.user.email = token.email;
+  //   return session;
+  // },
 
     async redirect() {
     // Ensure users are redirected to your base URL after login
