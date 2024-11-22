@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import TableDisplay from '../components/TableDisplay';
 import CSVUploader from './CSVUploader';
+import { Box, Typography } from '@mui/material';
 
 export default function FileUpload() {
   const [csvData, setCsvData] = useState(null); // Raw data from CSV
@@ -16,7 +17,10 @@ export default function FileUpload() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>CSV File Processor</h1>
+      <Box sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+ <Typography sx={{fontSize:"28px",color:"#515457"}}>CSV File Processor</Typography>
+      </Box>
+     
       {/* File Upload Section */}
       {!csvData && <CSVUploader onUpload={handleCSVUpload} />}
       
