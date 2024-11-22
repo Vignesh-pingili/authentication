@@ -2,12 +2,15 @@
 import { useState } from 'react';
 import TableDisplay from '../components/TableDisplay';
 import CSVUploader from './CSVUploader';
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Card, Typography } from '@mui/material';
 
 export default function FileUpload() {
   const [csvData, setCsvData] = useState(null); // Raw data from CSV
   const [headers, setHeaders] = useState(null); // Whether the file has headers
   const [jsonOutput, setJsonOutput] = useState(null); // Final JSON output
+
+  console.log(jsonOutput,"jsonOutput");
+  
 
   const handleCSVUpload = (data, hasHeaders) => {
     setCsvData(data);
@@ -36,10 +39,13 @@ export default function FileUpload() {
       
       {/* JSON Display Section */}
       {jsonOutput && (
-        <div>
-          <h2>Generated JSON Output</h2>
+          <Box sx={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+      <Card sx={{p:8,display:"inline-block"}}>
+
+        <div style={{display:"inline-block",padding:12}}>
+           <Typography sx={{fontSize:"26px",paddingBottom:2}}>Generated JSON Output</Typography>
           <pre>{JSON.stringify(jsonOutput, null, 2)}</pre>
-          <button
+          <Button variant='outlined'
             onClick={() => {
               const blob = new Blob([JSON.stringify(jsonOutput, null, 2)], {
                 type: 'application/json',
@@ -52,8 +58,11 @@ export default function FileUpload() {
             }}
           >
             Download JSON
-          </button>
+          </Button>
         </div>
+              </Card>
+   
+    </Box>
       )}
     </div>
   );

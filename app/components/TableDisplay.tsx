@@ -17,6 +17,9 @@ const TableDisplay = ({ csvData, hasHeaders, setJsonOutput, setHeaders }) => {
   };
 
   const generateJson = () => {
+
+    console.log("generateJson........",mappedLabels,error);
+    
     const result = {};
     for (let i = 0; i < columns; i++) {
       const columnLabel = String.fromCharCode(65 + i); // 'A', 'B', 'C', ...
@@ -26,9 +29,12 @@ const TableDisplay = ({ csvData, hasHeaders, setJsonOutput, setHeaders }) => {
       }      
       result[columnLabel] = mappedLabels[columnLabel] || ``;
     }
-    if(error != ""){
+
+    console.log(result,"results");
+    
+    if(error == ""){
     setJsonOutput(result);
-    setHeaders(false);
+    // setHeaders(false);
     }
 
   };
