@@ -1,32 +1,35 @@
 "use client"
 import { Box, Button, Typography } from '@mui/material';
 import Papa from 'papaparse';
+import { useState } from 'react';
 
 const CSVUploader = ({ onUpload }) => {
-  var data = null;
+    const [data, setData] = useState(null);
+
+    console.log(data,"data");
+    
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     Papa.parse(file, {
       complete: (result) => {
-        data = result.data;
+        setData(result.data) ;
       },
     });
   };
 
   const handleYes = () => {
     if(data){
-onUpload(data, true);
+       onUpload(data, true);
     }
-   
   }
 
   const handleNo = () => {
     if(data){
         onUpload(data,false)
     }
-    
   }
 
 
