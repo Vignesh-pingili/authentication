@@ -10,19 +10,23 @@ const handler = NextAuth({
   type: "oauth",
         clientId: process.env.ORCID_CLIENT_ID,
       clientSecret: process.env.ORCID_CLIENT_SECRET,
-         authorization:
-        "https://orcid.org/oauth/authorize?response_type=code&scope=/authenticate",
+          authorization: {
+      url: "https://orcid.org/oauth/authorize",
+      params: {
+        response_type: "code id_token", // Ensure `id_token` is requested
+        scope: "openid email profile", // Adjust scope as per your requirements
+      },
+    },
       token: "https://orcid.org/oauth/token",
       userinfo: "https://orcid.org/v3.0/~/orcid-profile",
 
   idToken: true,
-  checks: ["pkce", "state"],
+  checks: ["state"],
   profile(profile) {
     return {
       id: profile.sub,
       name: profile.name,
       email: profile.email,
-      image: profile.picture || null,
     }
   },
 },  
