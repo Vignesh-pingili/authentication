@@ -10,31 +10,36 @@ const TableDisplay = ({ csvData, hasHeaders, setJsonOutput, setHeaders }) => {
   const columns = csvData[0].length;
 
   const handleLabelChange = (column, value) => {
+
+    setError("")    
     setMappedLabels((prev) => ({
       ...prev,
       [column]: value,
     }));
   };
 
-  const generateJson = () => {
 
-    console.log("generateJson........",mappedLabels,error);
+  const generateJson = () => {
+      const result = {};
+      var isEmptyError = false;
+
     
-    const result = {};
     for (let i = 0; i < columns; i++) {
       const columnLabel = String.fromCharCode(65 + i); // 'A', 'B', 'C', ...
-      if(mappedLabels[columnLabel] == "" || mappedLabels[columnLabel] === undefined){
-            setError("No column should not be empty");
+      if(mappedLabels[columnLabel] == "" || mappedLabels[columnLabel] == undefined){
+        console.log(mappedLabels[columnLabel],"label empty");
+        
+            setError("No column label should not be empty");
+            isEmptyError = true;
             break;
       }      
       result[columnLabel] = mappedLabels[columnLabel] || ``;
     }
 
-    console.log(result,"results");
+    console.log(result,"results",error);
     
-    if(error == ""){
+    if(error == "" && isEmptyError == false){
     setJsonOutput(result);
-    // setHeaders(false);
     }
 
   };
