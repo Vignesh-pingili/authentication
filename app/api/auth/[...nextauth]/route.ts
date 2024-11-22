@@ -4,33 +4,32 @@ import LinkedInProvider from "next-auth/providers/linkedin"
 
 const handler = NextAuth({
     providers:[ 
-  {
-  id: "orcid",
-  name: "ORCID",
-  type: "oauth",
-        clientId: process.env.ORCID_CLIENT_ID,
-      clientSecret: process.env.ORCID_CLIENT_SECRET,
-          authorization: {
+        {
+    id: "orcid",
+    name: "ORCID",
+    type: "oauth",
+    wellKnown: "https://orcid.org/.well-known/openid-configuration",
+    authorization: {
       url: "https://orcid.org/oauth/authorize",
       params: {
-        response_type: "code", // Ensure `id_token` is requested
         scope: "openid email profile",
-        nonce: "random_nonce_value", // Adjust scope as per your requirements
+        response_type: "code",
       },
     },
-      token: "https://orcid.org/oauth/token",
-      userinfo: "https://orcid.org/v3.0/~/orcid-profile",
-
-  idToken: true,
-  checks: ["state"],
-  profile(profile) {
-    return {
-      id: profile.sub,
-      name: profile.name,
-      email: profile.email,
-    }
+    token: "https://orcid.org/oauth/token",
+    userinfo: "https://orcid.org/oauth/userinfo",
+    clientId: process.env.ORCID_CLIENT_ID,
+    clientSecret: process.env.ORCID_CLIENT_SECRET,
+    checks: ["state"],
+    profile(profile) {
+      return {
+        id: profile.sub,
+        name: profile.name,
+        email: profile.email,
+        image: null,
+      };
+    },
   },
-},  
         LinkedInProvider({
              clientId:process.env.LINKEDIN_ID ?? '',
             clientSecret:process.env.LINKEDIN_SECRET ?? '',
@@ -64,6 +63,20 @@ const handler = NextAuth({
     secret: process.env.AUTH_SECRET,
 
       callbacks: {
+
+          async jwt({ token, account, user }) {
+    if (account) {
+      token.accessToken = account.access_token;
+      token.id = user?.id || account.providerAccountId;
+    }
+    return token;
+  },
+  async session({ session, token }) {
+       session.user.name = token.name;
+    session.user.email = token.email;
+    return session;
+  },
+
   //   async jwt({ token, user, account, profile, isNewUser }) {
   //   // When a user signs in, the `user` and `account` objects will be available
   //   if (user) {
