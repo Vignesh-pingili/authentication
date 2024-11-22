@@ -26,7 +26,6 @@ const handler = NextAuth({
         id: profile.sub,
         name: profile.name,
         email: profile.email,
-        image: null,
       };
     },
   },
@@ -54,16 +53,10 @@ const handler = NextAuth({
             clientId:process.env.GOOGLE_CLIENT_ID ?? '',
             clientSecret:process.env.GOOGLE_CLIENT_SECRET ?? ''
         }),
-
-
     ],
-  
-    
     
     secret: process.env.AUTH_SECRET,
-
       callbacks: {
-
     async jwt({ token, user, account, profile, isNewUser }) {
     // When a user signs in, the `user` and `account` objects will be available
     if (user) {
@@ -76,20 +69,16 @@ const handler = NextAuth({
     if (account) {
       token.accessToken = account.access_token;
     }
-
     return token;
   },
     async session({ session, token, user }) {
-    // Add properties from token to session object
+
+      console.log(token,"token");
+      
     session.user.name = token.name;
     session.user.email = token.email;
     return session;
   },
-
-  //   async redirect() {
-  //   // Ensure users are redirected to your base URL after login
-  //   return "https://authentication-roan-eight.vercel.app/";
-  // },
   },
 
 })

@@ -43,9 +43,9 @@ export default function FileUpload() {
       <Card sx={{p:8,display:"inline-block"}}>
 
         <div style={{display:"inline-block",padding:12}}>
-           <Typography sx={{fontSize:"26px",paddingBottom:2}}>Generated JSON Output</Typography>
-          <pre>{JSON.stringify(jsonOutput, null, 2)}</pre>
-          <Button variant='outlined'
+           <Typography sx={{fontSize:"22px",paddingBottom:2}}>Generated JSON Output</Typography>
+          <pre style={{paddingBottom:18}}>{JSON.stringify(jsonOutput, null, 2)}</pre>
+          <button style={{padding:8}}
             onClick={() => {
               const blob = new Blob([JSON.stringify(jsonOutput, null, 2)], {
                 type: 'application/json',
@@ -58,7 +58,7 @@ export default function FileUpload() {
             }}
           >
             Download JSON
-          </Button>
+          </button>
         </div>
               </Card>
    
