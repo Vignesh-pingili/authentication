@@ -1,8 +1,7 @@
 "use client";
 
 import React from 'react';
-import { signIn, signOut, useSession } from "next-auth/react";
-import { error } from 'console';
+import { getProviders, signIn, signOut, useSession } from "next-auth/react";
 import { Card } from '@mui/material';
 
 function SigninButton (){
@@ -26,6 +25,8 @@ function SigninButton (){
  <div style={{padding:12,display:"flex",alignItems:"center",justifyContent:"flex-end",gap:2}}>
          <button style={{padding:8}} onClick={() => signIn('google')}> Signin with google </button>
          <button style={{padding:8}} onClick={() => signIn('linkedin')}>signin with linkedin</button>
+          <button style={{padding:8}} onClick={() => signIn('orcid')}>signin with orcid</button>
+
     </div>
     </Card>
    
@@ -33,3 +34,11 @@ function SigninButton (){
 }
 
 export default SigninButton
+
+
+export async function getServerSideProps() {
+  const providers = await getProviders();
+  return {
+    props: { providers },
+  };
+}

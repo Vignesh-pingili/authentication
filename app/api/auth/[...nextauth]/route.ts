@@ -3,7 +3,26 @@ import GoogleProvider from "next-auth/providers/google"
 import LinkedInProvider from "next-auth/providers/linkedin"
 
 const handler = NextAuth({
-    providers:[
+    providers:[ 
+  {
+  id: "orcid",
+  name: "ORCID",
+  type: "oauth",
+  wellKnown: "https://accounts.google.com/.well-known/openid-configuration",
+        clientId: process.env.ORCID_CLIENT_ID,
+      clientSecret: process.env.ORCID_CLIENT_SECRET,
+  authorization: { params: { scope: "/authenticate" } },
+  idToken: true,
+  checks: ["pkce", "state"],
+  profile(profile) {
+    return {
+      id: profile.sub,
+      name: profile.name,
+      email: profile.email,
+      image: profile.picture || null,
+    }
+  },
+},  
         LinkedInProvider({
              clientId:process.env.LINKEDIN_ID ?? '',
             clientSecret:process.env.LINKEDIN_SECRET ?? '',
@@ -28,8 +47,13 @@ const handler = NextAuth({
             clientId:process.env.GOOGLE_CLIENT_ID ?? '',
             clientSecret:process.env.GOOGLE_CLIENT_SECRET ?? ''
         }),
-        
-    ],secret: process.env.AUTH_SECRET,
+
+
+    ],
+  
+    
+    
+    secret: process.env.AUTH_SECRET,
   //     callbacks: {
   //   async jwt({ token, account }) {
   //     if (account) {
@@ -42,6 +66,19 @@ const handler = NextAuth({
   //     return session;
   //   },
   // },
+
+      //   authorizationUrl:
+      //   "https://orcid.org/oauth/authorize?response_type=code&scope=/authenticate",
+      // tokenUrl: "https://orcid.org/oauth/token",
+      // userinfoUrl: "https://orcid.org/v3.0/~/orcid-profile",
+      // profileUrl: "https://pub.orcid.org/v3.0/~/orcid",
+      // async profile(profile) {
+      //   return {
+      //     id: profile.orcid,
+      //     name: profile.name || null,
+      //     email: profile.email || null,
+      //   };
+      // },
 })
 
 export {handler as GET, handler as POST};
