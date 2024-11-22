@@ -2,7 +2,7 @@ import "./globals.css";
 import Providers from "./components/Providers";
 
 export const metadata = {
-  title: "sign in app 100000",
+  title: "authentication app",
   description: "My awesome Next.js application",
   icons: {
     icon: "/favicon.png",

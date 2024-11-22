@@ -64,40 +64,27 @@ const handler = NextAuth({
 
       callbacks: {
 
-          async jwt({ token, account, user }) {
+    async jwt({ token, user, account, profile, isNewUser }) {
+    // When a user signs in, the `user` and `account` objects will be available
+    if (user) {
+      token.id = user.id;
+      token.name = user.name;
+      token.email = user.email;
+    }
+
+    // Optionally, you can use the account or profile data for further customization
     if (account) {
       token.accessToken = account.access_token;
-      token.id = user?.id || account.providerAccountId;
     }
+
     return token;
   },
-  async session({ session, token }) {
-       session.user.name = token.name;
+    async session({ session, token, user }) {
+    // Add properties from token to session object
+    session.user.name = token.name;
     session.user.email = token.email;
     return session;
   },
-
-  //   async jwt({ token, user, account, profile, isNewUser }) {
-  //   // When a user signs in, the `user` and `account` objects will be available
-  //   if (user) {
-  //     token.id = user.id;
-  //     token.name = user.name;
-  //     token.email = user.email;
-  //   }
-
-  //   // Optionally, you can use the account or profile data for further customization
-  //   if (account) {
-  //     token.accessToken = account.access_token;
-  //   }
-
-  //   return token;
-  // },
-  //   async session({ session, token, user }) {
-  //   // Add properties from token to session object
-  //   session.user.name = token.name;
-  //   session.user.email = token.email;
-  //   return session;
-  // },
 
   //   async redirect() {
   //   // Ensure users are redirected to your base URL after login

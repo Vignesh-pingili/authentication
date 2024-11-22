@@ -1,9 +1,10 @@
+"use client"
 import Papa from 'papaparse';
 import { useState } from 'react';
 
 const CSVUploader = ({ onUpload }) => {
-  const [hasHeaders, setHasHeaders] = useState(null);
 
+    const [header, setheader] = useState(null)
   var data = null;
 
   const handleFileChange = (e) => {
@@ -21,13 +22,14 @@ const CSVUploader = ({ onUpload }) => {
     if(data){
 onUpload(data, true);
     }
-     
+   
   }
 
   const handleNo = () => {
     if(data){
         onUpload(data,false)
     }
+    
   }
 
 
@@ -36,21 +38,23 @@ onUpload(data, true);
       <h2>Upload CSV File</h2>
       <input type="file" accept=".csv" onChange={handleFileChange} />
       <div>
-        <p>Does your file have headers?</p>
+        <p style={{padding:2}}>Does your file have headers?</p>
         <label>
-          <input
+          <input style={{padding:4}}
             type="radio"
-            value="yes"
-            checked={hasHeaders === true}
+            value="true"
+            id="true"
+            checked = { header == true}
             onChange={() => handleYes()}
           />
           Yes
         </label>
         <label>
           <input
+          id="false"
             type="radio"
-            value="no"
-            checked={hasHeaders === false}
+            value="false"
+            checked = {header == false}
             onChange={() => handleNo()}
           />
           No
