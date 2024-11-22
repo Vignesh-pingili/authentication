@@ -8,6 +8,12 @@ function SigninButton (){
 
   const { data: session } = useSession();
 
+  console.log(session.user,"session user");
+
+  console.log(session,"session");
+  
+  
+
   if(session && session.user){
     return(
           <Card sx={{p:1}}>

@@ -16,7 +16,6 @@ const handler = NextAuth({
         response_type: "code",
       },
     },
-    token: "https://orcid.org/oauth/token",
     userinfo: "https://orcid.org/oauth/userinfo",
     clientId: process.env.ORCID_CLIENT_ID,
     clientSecret: process.env.ORCID_CLIENT_SECRET,
@@ -57,7 +56,12 @@ const handler = NextAuth({
     
     secret: process.env.AUTH_SECRET,
       callbacks: {
+        
     async jwt({ token, user, account, profile, isNewUser }) {
+      console.log(token,user,"jwt");
+      console.log(profile,"profile in jwt");
+      
+      
     // When a user signs in, the `user` and `account` objects will be available
     if (user) {
       token.id = user.id;
