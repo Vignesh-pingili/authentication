@@ -2,12 +2,16 @@ import "./globals.css";
 import Providers from "./components/Providers";
 
 export const metadata = {
-  title: "sign in app",
+  title: "sign in app 100000",
   description: "My awesome Next.js application",
   icons: {
     icon: "/favicon.png",
   },
+    verification: {
+    google: "hyL4OJxW4Qahij7GyY0FMb13dH_7mYx8E0Dy-bgCPsE",
+  },
 };
+ 
 
 export default function RootLayout({ children }) {
   return (
