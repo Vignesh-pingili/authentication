@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Box, Button, Card, Typography } from '@mui/material';
 import { useState } from 'react';
 
 const TableDisplay = ({ csvData, hasHeaders, setJsonOutput, setHeaders }) => {
@@ -34,8 +34,10 @@ const TableDisplay = ({ csvData, hasHeaders, setJsonOutput, setHeaders }) => {
   };
 
   return (
-    <div>
-      <h2>Map Columns to Labels</h2>
+    <Box sx={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+      <Card sx={{p:8,display:"inline-block"}}>
+ <div style={{border:"1px solid #adada8",borderRadius:18,display:"inline-block",padding:12}}>
+       <Typography sx={{fontSize:"26px",paddingBottom:2}}>Map Columns to Labels</Typography>
       <table cellPadding="10">
         <thead>
           <tr>
@@ -65,11 +67,15 @@ const TableDisplay = ({ csvData, hasHeaders, setJsonOutput, setHeaders }) => {
           })}
         </tbody>
       </table>
-      <button onClick={generateJson} style={{ marginTop: '20px' }}>
+      <Button variant='outlined' onClick={() => generateJson()} style={{ marginTop: '20px' }}>
         Done
-      </button>
+      </Button>
       <Typography sx={{color:"red"}}>{error}</Typography>
     </div>
+      </Card>
+   
+    </Box>
+
   );
 };
 
