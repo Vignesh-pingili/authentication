@@ -1,12 +1,9 @@
 "use client"
+import { Box, Button, Typography } from '@mui/material';
 import Papa from 'papaparse';
-import { useState } from 'react';
 
 const CSVUploader = ({ onUpload }) => {
-
-    const [header, setheader] = useState(null)
   var data = null;
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -38,27 +35,14 @@ onUpload(data, true);
       <h2>Upload CSV File</h2>
       <input type="file" accept=".csv" onChange={handleFileChange} />
       <div>
-        <p style={{padding:2}}>Does your file have headers?</p>
-        <label>
-          <input style={{padding:4}}
-            type="radio"
-            value="true"
-            id="true"
-            checked = { header == true}
-            onChange={() => handleYes()}
-          />
-          Yes
-        </label>
-        <label>
-          <input
-          id="false"
-            type="radio"
-            value="false"
-            checked = {header == false}
-            onChange={() => handleNo()}
-          />
-          No
-        </label>
+        <Typography sx={{p:2}}>Does your file have headers?</Typography>
+        <Box>
+  <Button sx={{mr:2}} onClick={() => handleYes()} variant='contained'>Yes</Button>
+        <Button onClick={() => handleNo()} variant='outlined'>No</Button>
+        </Box>
+
+      
+     
       </div>
     </div>
   );
