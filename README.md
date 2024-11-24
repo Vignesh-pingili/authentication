@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+CSV File Processor
+Overview
+The CSV File Processor is a web application built with Next.js that allows users to upload and process CSV files. It includes authentication using NextAuth.js with support for Google, LinkedIn, and ORCID providers.
 
-## Getting Started
+Features
+Drag-and-drop file upload
+Authentication with Google, LinkedIn, and ORCID
+Mobile-responsive design
+Robust error handling for invalid CSV files
 
-First, run the development server:
+Prerequisites
+Before running the application locally, ensure you have the following installed:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Node.js (version 16 or later)
+npm or yarn
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Installation
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1.git clone <repository-url>
+cd csv-file-processor
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2.npm install
 
-## Learn More
+3.Set Up Environment Variables Create a .env file in the root directory and configure the following variables:
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
 
-To learn more about Next.js, take a look at the following resources:
+LINKEDIN_ID=your-linkedin-client-id
+LINKEDIN_SECRET=your-linkedin-client-secret
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+ORCID_CLIENT_ID=your-orcid-client-id
+ORCID_CLIENT_SECRET=your-orcid-client-secret
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+NEXTAUTH_URL=http://localhost:3000
+AUTH_SECRET=your-random-secret
 
-## Deploy on Vercel
+4.Setting Up Google OAuth Credentials
+Visit the Google Cloud Console.
+Create a new project (or use an existing one).
+Navigate to APIs & Services > Credentials.
+Create new credentials for an OAuth 2.0 Client ID:
+Application Type: Web Application
+Authorized Redirect URI: http://localhost:3000/api/auth/callback/google
+Copy the Client ID and Client Secret into the .env file.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5.Setting Up LinkedIn OAuth Credentials
+Go to the LinkedIn Developer Portal.
+Create a new application.
+Navigate to the Auth tab and configure the Redirect URL:
+Use: http://localhost:3000/api/auth/callback/linkedin
+Copy the Client ID and Client Secret into the .env file.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Running the Application
+1.Start the Development Server: npm run dev
+2.Build for Production: npm run build
+npm start

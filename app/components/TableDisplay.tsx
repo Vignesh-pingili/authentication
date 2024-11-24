@@ -5,9 +5,7 @@ const TableDisplay = ({ csvData, hasHeaders, setJsonOutput }) => {
   const [mappedLabels, setMappedLabels] = useState({});
   const [error, setError] = useState("");
 
-  console.log(csvData,"cvdata",hasHeaders);  
-
-  const startRow = hasHeaders == "yes" ? 1 : 0; // Skip header row if it exists
+  const startRow = hasHeaders == "yes" ? 1 : 0; 
   const dataRow = csvData[startRow];
   const columns = csvData[0].length;
   

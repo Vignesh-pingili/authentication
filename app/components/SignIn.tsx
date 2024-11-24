@@ -10,6 +10,22 @@ const SignIn = () => {
       const { data: session } = useSession();
 
       console.log(session,"session");
+
+      const handleSignIn = async (provider) => {
+  try {
+    const result = await signIn(provider, { redirect: false }); // Disable automatic redirection
+    if (result?.error) {
+      console.error("Authentication error:", result.error);
+      alert(`Authentication failed: ${result.error}`);
+    } else {
+      // Successful login
+      console.log("Sign-in successful");
+    }
+  } catch (error) {
+    console.error("Unexpected error during sign-in:", error);
+    alert("An unexpected error occurred. Please try again.");
+  }
+};
       
 
       if(session){
@@ -47,7 +63,7 @@ const SignIn = () => {
                     <Typography sx={{textAlign:"center",color:"#605f63"}}>Sign In with</Typography>
                 </Box>
                 <Card sx={{m:1}} elevation={3}>
-                    <Box sx={{display:"flex",gap:1,p:1.2}} onClick={() => signIn('google')}>
+                    <Box sx={{display:"flex",gap:1,p:1.2}} onClick={() => handleSignIn('google')}>
                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="26px" height="26px"><linearGradient id="95yY7w43Oj6n2vH63j6HJb" x1="29.401" x2="29.401" y1="4.064" y2="106.734" gradientTransform="matrix(1 0 0 -1 0 66)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ff5840"></stop><stop offset=".007" stop-color="#ff5840"></stop><stop offset=".989" stop-color="#fa528c"></stop><stop offset="1" stop-color="#fa528c"></stop></linearGradient><path fill="url(#95yY7w43Oj6n2vH63j6HJb)" d="M47.46,15.5l-1.37,1.48c-1.34,1.44-3.5,1.67-5.15,0.6c-2.71-1.75-6.43-3.13-11-2.37	c-4.94,0.83-9.17,3.85-11.64,
         7.97l-8.03-6.08C14.99,9.82,23.2,5,32.5,5c5,0,9.94,1.56,14.27,4.46	C48.81,10.83,49.13,13.71,47.46,15.5z"></path><linearGradient id="95yY7w43Oj6n2vH63j6HJc" x1="12.148" x2="12.148" y1=".872" y2="47.812" gradientTransform="matrix(1 0 0 -1 0 66)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#feaa53"></stop><stop offset=".612" stop-color="#ffcd49"></stop><stop offset="1" stop-color="#ffde44"></stop></linearGradient><path fill="url(#95yY7w43Oj6n2vH63j6HJc)" d="M16.01,30.91c-0.09,2.47,0.37,4.83,1.27,6.96l-8.21,6.05c-1.35-2.51-2.3-5.28-2.75-8.22	c-1.06-6.88,0.54-13.38,
         3.95-18.6l8.03,6.08C16.93,25.47,16.1,28.11,16.01,30.91z"></path><linearGradient id="95yY7w43Oj6n2vH63j6HJd" x1="29.76" x2="29.76" y1="32.149" y2="-6.939" gradientTransform="matrix(1 0 0 -1 0 66)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#42d778"></stop><stop offset=".428" stop-color="#3dca76"></stop><stop offset="1" stop-color="#34b171"></stop></linearGradient><path fill="url(#95yY7w43Oj6n2vH63j6HJd)" d="M50.45,51.28c-4.55,4.07-10.61,6.57-17.36,6.71C22.91,58.2,13.66,52.53,9.07,43.92l8.21-6.05	C19.78,43.81,
@@ -57,14 +73,14 @@ const SignIn = () => {
                     </Box>
                 </Card>
                                 <Card sx={{m:1,backgroundColor:"#0770A9"}} elevation={3}>
-                    <Box onClick={() => signIn('linkedin')} sx={{display:"flex",alignItems:"center", gap:1,p:0.8}}>
+                    <Box onClick={() => handleSignIn('linkedin')} sx={{display:"flex",alignItems:"center", gap:1,p:0.8}}>
                         <Typography sx={{color:"#FFF",fontSize:"1.4rem",pl:1.6,fontWeight:"bold"}}>In</Typography>
                         <Typography sx={{color:"#FFF",lineHeight:"1.6rem"}}>SignIn with Linked In</Typography>
                     </Box>
                 </Card>
 
                                 <Card sx={{m:1}} elevation={3}>
-                    <Box onClick={() => signIn('orcid')} sx={{display:"flex",gap:1.8,p:1,alignItems:"center"}}>
+                    <Box onClick={() => handleSignIn('orcid')} sx={{display:"flex",gap:1.8,p:1,alignItems:"center"}}>
                          <Box sx={{backgroundColor:"#A6CE39",color:"#FFF",p:1,borderRadius:"50px"}}>
                            iD
                          </Box>

@@ -45,9 +45,6 @@ const CSVUploader = ({ onUpload }) => {
   <Button sx={{mr:2}} onClick={() => handleYes()} variant='contained'>Yes</Button>
         <Button onClick={() => handleNo()} variant='outlined'>No</Button>
         </Box>
-
-      
-     
       </div>
         </Box>
 
