@@ -99,42 +99,24 @@ caption {
 }
 
 @media (max-width: 500px) {
-  table {
-    font-size: 14px; /* Smaller font size for very small screens */
-    width: 100%; /* Ensure table still stretches to fit */
-  }
-
-  tbody td, thead th {
-    padding: 8px; /* Reduce padding for smaller screens */
-  }
-
-  /* Make table scrollable horizontally */
   .table-container {
-    display: block;
-    overflow-x: auto;
+    overflow-x: auto; /* Allow horizontal scrolling */
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Optional: Stack rows for ultra-small screens (if needed) */
+  table {
+    font-size: 14px; /* Reduce font size for smaller screens */
+    width: 100%; /* Ensure table stretches */
+    display: table; /* Keep table display */
+  }
+
+  thead th, tbody td {
+    white-space: nowrap;
+    padding: 8px; /* Adjust padding */
+    font-size: 13px;
+  }
+
   tbody tr {
-    display: block;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-  }
-
-  tbody td {
-    display: block;
-    text-align: right;
-    position: relative;
-    padding-left: 50%;
-  }
-
-  tbody td::before {
-    content: attr(data-label); /* Use data-label attribute for headers */
-    position: absolute;
-    left: 10px;
-    width: calc(50% - 20px);
-    text-align: left;
-    font-weight: bold;
+    display: table-row; /* Retain row structure */
   }
 }
