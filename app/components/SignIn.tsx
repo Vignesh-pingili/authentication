@@ -48,7 +48,7 @@ const SignIn = () => {
     <Box sx={{display:"flex",gap:1}}>
        <Typography sx={{backgroundColor:"#3b444b",p:0.8,color:"#FFF",borderRadius:"8px",pl:2}}> Welcome – Sign in to unlock powerful tools for your data!</Typography>
     </Box>
-    <Button variant='outlined' sx={{textTransform:"none"}} onClick={() => signOut()}>Log In</Button>
+    <Button variant='outlined' sx={{textTransform:"none"}} onClick={() => handleSignIn('google')}>Log In</Button>
     </div>
     </Card>
     <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",pt:6}}>
