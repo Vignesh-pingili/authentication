@@ -58,12 +58,14 @@ const handler = NextAuth({
       callbacks: {
         
     async jwt({ token, user, account, profile, isNewUser }) {
-      console.log(token,"jwt");
+      console.log(token,"token in jwt");
       console.log(profile,"profile in jwt");
       
       
     // When a user signs in, the `user` and `account` objects will be available
     if (user) {
+      console.log(user,"user in jwt");
+      
       token.id = user.id;
       token.name = user.name;
       token.email = user.email;
@@ -71,6 +73,8 @@ const handler = NextAuth({
 
     // Optionally, you can use the account or profile data for further customization
     if (account) {
+      console.log(account,"account in jwt");
+      
       token.accessToken = account.access_token;
     }
     return token;
