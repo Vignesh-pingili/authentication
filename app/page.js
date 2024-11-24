@@ -9,7 +9,7 @@ export default function Home() {
 
 
   return (
-    <div style={{backgroundColor:"F0F4F9"}}>    
+    <div style={{backgroundColor:"#F0F4F9"}}>    
      <SignIn></SignIn> 
      {
       session && <FileUpload></FileUpload>
