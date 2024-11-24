@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import FileUpload from "./components/FileUpload";
-import SigninButton from "./components/SigninButton";
+import SignIn from "./components/SignIn";
 
 export default function Home() {
 
@@ -9,14 +9,12 @@ export default function Home() {
 
 
   return (
-    <div >
-    <SigninButton></SigninButton>
-     <div style={{padding:"150"}}>
+    <div style={{backgroundColor:"F0F4F9"}}>    
+     <SignIn></SignIn> 
      {
       session && <FileUpload></FileUpload>
      }
      
-     </div>
     </div>
   );
 }

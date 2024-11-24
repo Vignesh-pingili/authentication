@@ -3,65 +3,37 @@ import { useState } from 'react';
 import TableDisplay from '../components/TableDisplay';
 import CSVUploader from './CSVUploader';
 import { Box, Button, Card, Typography } from '@mui/material';
+import CSVUploaderFile from './CSVUploderFile';
+import AlertDialogSlide from './RowChecker';
 
 export default function FileUpload() {
   const [csvData, setCsvData] = useState(null); // Raw data from CSV
-  const [headers, setHeaders] = useState(null); // Whether the file has headers
+  const [headers, setHeaders] = useState(""); // Whether the file has headers
+  const [headersDialog, setHeadersDialog] = useState(false)
   const [jsonOutput, setJsonOutput] = useState(null); // Final JSON output
 
   console.log(jsonOutput,"jsonOutput");
-  
+      console.log(csvData,"data");
+      console.log(headers,"headers");
 
-  const handleCSVUpload = (data, hasHeaders) => {
-    setCsvData(data);
-    setHeaders(hasHeaders);
-  };
-
-
-  return (
-    <div style={{ padding: '20px' }}>
-      <Box sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
- <Typography sx={{fontSize:"28px",color:"#515457"}}>CSV File Processor</Typography>
+  return(
+    <Box>
+      <Typography sx={{color:"#5d5a63",fontSize:"1.8rem",fontWeight:"650",pl:5,pt:2,pb:2,textAlign:"center"}}>CSV File Processor</Typography>
+      <Box >
+       <CSVUploaderFile setCsvData={setCsvData} setHeaders={setHeadersDialog} />
       </Box>
+      {
+        csvData && headers && <TableDisplay csvData={csvData} hasHeaders={headers} setJsonOutput={setJsonOutput}></TableDisplay>
+      }
      
-      {/* File Upload Section */}
-      {!csvData && <CSVUploader onUpload={handleCSVUpload} />}
-      
-      {/* Table Display Section */}
-      {csvData && !jsonOutput && (
-        <TableDisplay
-          csvData={csvData}
-          hasHeaders={headers}
-          setHeaders={setHeaders}
-          setJsonOutput={setJsonOutput}
-        />
-      )}
-      
-      {/* JSON Display Section */}
-      {jsonOutput && (
+      <AlertDialogSlide open={headersDialog} setOpen={setHeadersDialog} setHeaders={setHeaders}></AlertDialogSlide>
+
+    {jsonOutput && (
           <Box sx={{display:"flex",alignItems:"center",justifyContent:"center"}}>
-      <Card sx={{p:8,display:"inline-block"}}>
-
         <div style={{display:"inline-block",padding:12}}>
-           <Typography sx={{fontSize:"22px",paddingBottom:2}}>Generated JSON Output</Typography>
+           <Typography sx={{fontSize:"18px",paddingBottom:2,fontWeight:"600"}}>Generated JSON Output</Typography>
           <pre style={{paddingBottom:18}}>{JSON.stringify(jsonOutput, null, 2)}</pre>
-          {/* <button style={{padding:8}}
-            onClick={() => {
-              const blob = new Blob([JSON.stringify(jsonOutput, null, 2)], {
-                type: 'application/json',
-              });
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement('a');
-              a.href = url;
-              a.download = 'output.json';
-              a.click();
-            }}
-          >
-            Download JSON
-          </button> */}
-
-          <button
-  style={{ padding: 8 }}
+          <Button variant='contained'
   onClick={() => {
     const jsonOutput1 = jsonOutput; // Replace this with your JSON data
 
@@ -89,12 +61,11 @@ export default function FileUpload() {
   }}
 >
   Download JSON
-</button>
+</Button>
         </div>
-              </Card>
-   
     </Box>
-      )}
-    </div>
-  );
+    )}
+
+    </Box>
+  )
 }

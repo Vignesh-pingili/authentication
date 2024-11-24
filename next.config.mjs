@@ -7,7 +7,7 @@ const nextConfig = {};
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
-    Google,LinkedIn
+    Google,LinkedIn,
   ],
 };
 

@@ -35,6 +35,50 @@ a {
   text-decoration: none;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 5px 0;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  text-align: left;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+  background-color: #595959;
+  color: white;
+}
+
+thead th {
+  padding: 12px 15px;
+}
+
+tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+tbody td {
+  padding: 12px 15px;
+}
+
+caption {
+  font-size: 20px;
+  margin: 10px 0;
+  font-weight: bold;
+  color: #333;
+}
+
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
