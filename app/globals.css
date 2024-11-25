@@ -37,7 +37,7 @@ a {
 }
 
 /* Base Table Styles */
-table { 
+table {
   width: 100%;
   border-collapse: collapse;
   margin: 25px 0;
@@ -82,7 +82,7 @@ caption {
   color: #333;
 }
 
-/* Responsive Styles for Small Screens */
+/* Responsive Styles */
 @media (max-width: 768px) {
   table {
     font-size: 16px;
@@ -107,7 +107,6 @@ caption {
   table {
     font-size: 14px; /* Reduce font size for smaller screens */
     width: 100%; /* Ensure table stretches */
-    display: table; /* Keep table display */
   }
 
   thead th, tbody td {
@@ -115,8 +114,33 @@ caption {
     padding: 8px; /* Adjust padding */
     font-size: 13px;
   }
+}
 
-  tbody tr {
-    display: table-row; /* Retain row structure */
+@media (max-width: 360px) {
+  .table-container {
+    overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    font-size: 12px; /* Further reduce font size for 360px width */
+    width: 100%; /* Keep table width dynamic */
+    min-width: 600px; /* Ensure table layout remains intact */
+  }
+
+  thead th {
+    padding: 6px; /* Reduce padding for better fit */
+    font-size: 12px;
+  }
+
+  tbody td {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  /* Keep three-column layout intact */
+  thead th, tbody td {
+    white-space: nowrap; /* Prevent text from breaking */
   }
 }
+
