@@ -35,7 +35,6 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
 /* Base Table Styles */
 table {
   width: 100%;
@@ -56,6 +55,7 @@ thead th {
   color: #FFF;
   font-weight: 500;
   padding: 12px 15px;
+  word-wrap: break-word; /* Allow long text to break */
 }
 
 tbody tr {
@@ -73,6 +73,7 @@ tbody tr:hover {
 
 tbody td {
   padding: 12px 15px;
+  word-wrap: break-word; /* Allow text to wrap within columns */
 }
 
 caption {
@@ -82,7 +83,7 @@ caption {
   color: #333;
 }
 
-/* Responsive Styles */
+/* Responsive Styles for Smaller Screens */
 @media (max-width: 768px) {
   table {
     font-size: 16px;
@@ -90,57 +91,37 @@ caption {
 
   .table-container {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling for mobile devices */
+    -webkit-overflow-scrolling: touch;
   }
 
   thead th, tbody td {
-    white-space: nowrap; /* Prevent wrapping of text */
+    white-space: normal; /* Allow text to wrap */
   }
 }
 
 @media (max-width: 500px) {
   .table-container {
-    overflow-x: auto; /* Allow horizontal scrolling */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
     -webkit-overflow-scrolling: touch;
   }
 
   table {
-    font-size: 14px; /* Reduce font size for smaller screens */
-    width: 100%; /* Ensure table stretches */
+    font-size: 14px;
+    width: 100%; /* Ensure table stretches to fit */
   }
 
   thead th, tbody td {
-    white-space: nowrap;
-    padding: 8px; /* Adjust padding */
+    padding: 8px;
     font-size: 13px;
-  }
-}
-
-@media (max-width: 360px) {
-  .table-container {
-    overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
-    -webkit-overflow-scrolling: touch;
+    white-space: normal; /* Allow wrapping of text */
   }
 
-  table {
-    font-size: 12px; /* Further reduce font size for 360px width */
-    width: 100%; /* Keep table width dynamic */
-    min-width: 600px; /* Ensure table layout remains intact */
-  }
-
-  thead th {
-    padding: 6px; /* Reduce padding for better fit */
-    font-size: 12px;
+  tbody tr {
+    display: table-row; /* Retain row structure for responsiveness */
   }
 
   tbody td {
-    padding: 6px;
-    font-size: 12px;
-  }
-
-  /* Keep three-column layout intact */
-  thead th, tbody td {
-    white-space: nowrap; /* Prevent text from breaking */
+    text-align: left; /* Ensure alignment for readability */
+    word-break: break-word; /* Break long text into multiple lines */
   }
 }
-
